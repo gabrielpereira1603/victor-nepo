@@ -33,12 +33,9 @@ export default function CardHouse() {
                                 width={300}
                                 height={200}
                             />
-                            <div className={style.boxValue}>
-                                <h2>{property.value}</h2>
-                            </div>
                         </div>
                         <div className={style.cardBody}>
-                            <h2 className={style.title}>Propriedade #{property.id}</h2>
+                            <h2 className={style.title}><span>{property.neighborhood.name}</span> #{property.id}</h2>
                             <span className={style.id}>ID: {property.id}</span>
                             <h2 className={style.cityState}>
                                 {property.city.name}, {property.state.name}
@@ -46,7 +43,11 @@ export default function CardHouse() {
                             <h2 className={style.neighborhood}>
                                 Bairro: {property.neighborhood.name}
                             </h2>
+                            <div className={style.boxValue}>
+                                <h2><strong>{property.value}</strong></h2>
+                            </div>
                         </div>
+
                         <div className={style.rooms}>
                             <ul className={style.list}>
                                 <li className={style.itens}>
