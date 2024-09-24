@@ -2,14 +2,12 @@
 
 import style from "@/app/components/latestProperties/latestProperties.module.css";
 import Image from "next/image";
+import CardHouse from "@/app/components/cardHouse/cardHouse";
 
 export default function LatestProperties() {
     return (
-        <section
-            className={style.latestProperties}
-        >
+        <section className={style.latestProperties}>
             <div className={style.content}>
-
                 <div className={style.boxText}>
                     <h2 className={style.title}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.9}
@@ -21,7 +19,7 @@ export default function LatestProperties() {
                     </h2>
                     <h2 className={style.subtitle}>Disponibilizamos vários imóveis para sua escolha!</h2>
                 </div>
-
+                <CardHouse />
             </div>
         </section>
     );
