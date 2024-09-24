@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.cardMain{
+    margin-top: 20px;
+    max-width: 300px;
+    border: 1px solid #555353;
+    border-radius: 6px;
+
+    -webkit-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
+    -moz-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
+    box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
+}
+
 .cardBody{
     padding: 20px;
     display: flex;
@@ -7,7 +19,65 @@
 
 }
 
+.title{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    color: #514f4f;
+}
+
+.cardTitle img {
+    border-top-left-radius: 6px; /* Arredonda o canto superior esquerdo */
+    border-top-right-radius: 6px; /* Arredonda o canto superior direito */
+    width: 100%; /* Para que a imagem preencha o contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
 .title span{
-    color: black;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
     font-weight: 600;
+
+    color: black;
+}
+
+.id{
+    font-size: 0.8rem;
+    padding: 4px;
+    color: red;
+    font-style: italic;
+    margin-bottom: 4px;
+}
+
+.cityState{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.9rem;
+}
+
+.cityState svg {
+    width: 1rem; /* Ajuste o valor conforme necessário */
+    height: 1rem; /* Ajuste o valor conforme necessário */
+}
+
+.neighborhood{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.9rem;
+}
+
+.neighborhood svg {
+    width: 1rem; /* Ajuste o valor conforme necessário */
+    height: 1rem; /* Ajuste o valor conforme necessário */
+}
+
+.boxValue{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: rgb(69,151,69);
 }
