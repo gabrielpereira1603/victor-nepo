@@ -81,3 +81,35 @@
     margin-bottom: 10px;
     color: rgb(69,151,69);
 }
+
+.rooms{
+    border-top: 1px solid #555353;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    list-style: none; /* Remove os marcadores da lista */
+}
+
+.itens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: #4a4949;
+}
+
+.divider {
+    width: 2px; /* Largura da linha */
+    height: 40px; /* Altura da linha */
+    background: gray; /* Cor da linha */
+    margin: 0 10px; /* Espaço entre a linha e os itens */
+}
+
+.itens svg {
+    width: 1rem; /* Ajuste o valor conforme necessário */
+    height: 1rem; /* Ajuste o valor conforme necessário */
+}

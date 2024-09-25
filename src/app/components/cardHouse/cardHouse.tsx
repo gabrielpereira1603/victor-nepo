@@ -5,17 +5,23 @@ import { Property } from "@/app/models/Property";
 import style from "@/app/components/cardHouse/cardHouse.module.css";
 import Image from "next/image";
 
+import { MdOutlineBedroomParent } from "react-icons/md";
+import { MdOutlineBathroom } from "react-icons/md";
+import { IoTvSharp } from "react-icons/io5";
+import { TbToolsKitchen3 } from "react-icons/tb";
+import { MdOutlineGarage } from "react-icons/md";
+import { PiSwimmingPool } from "react-icons/pi";
+
+
 export default function CardHouse() {
-    const [properties, setProperties] = useState<Property[]>([]); // Definindo o tipo do estado
+    const [properties, setProperties] = useState<Property[]>([]);
 
     useEffect(() => {
-        // Fazendo a requisição para a API que retorna os imóveis
-        fetch("https://victornepo.somosdevteam.com/api/properties/all") // Substitua pela URL correta da API
+        fetch("https://victornepo.somosdevteam.com/api/properties/all")
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log(data.data); // Adicione esta linha
-                    setProperties(data.data); // Atualizando o estado com os dados da API
+                    setProperties(data.data);
                 }
             })
             .catch(error => console.error("Erro ao buscar propriedades:", error));
@@ -63,28 +69,36 @@ export default function CardHouse() {
                         <div className={style.rooms}>
                             <ul className={style.list}>
                                 <li className={style.itens}>
-                                    <i></i>
-                                    <p>Quartos: {property.bedrooms}</p>
+                                    <MdOutlineBedroomParent/>
+                                    <p>{property.bedrooms}</p>
                                 </li>
+                                <div className={style.divider}/>
+                                {/* Divisor entre os itens */}
                                 <li className={style.itens}>
-                                    <i></i>
-                                    <p>Banheiros: {property.bathrooms}</p>
+                                    <MdOutlineBathroom/>
+                                    <p>{property.bathrooms}</p>
                                 </li>
+                                <div className={style.divider}/>
+                                {/* Divisor entre os itens */}
                                 <li className={style.itens}>
-                                    <i></i>
-                                    <p>Salas de estar: {property.living_rooms}</p>
+                                    <IoTvSharp/>
+                                    <p>{property.living_rooms}</p>
                                 </li>
+                                <div className={style.divider}/>
+                                {/* Divisor entre os itens */}
                                 <li className={style.itens}>
-                                    <i></i>
-                                    <p>Cozinhas: {property.kitchens}</p>
+                                <TbToolsKitchen3 />
+                                    <p>{property.kitchens}</p>
                                 </li>
+                                <div className={style.divider} /> {/* Divisor entre os itens */}
                                 <li className={style.itens}>
-                                    <i></i>
-                                    <p>Garagens: {property.parking_spaces}</p>
+                                    <MdOutlineGarage />
+                                    <p>{property.parking_spaces}</p>
                                 </li>
+                                <div className={style.divider} /> {/* Divisor entre os itens */}
                                 <li className={style.itens}>
-                                    <i></i>
-                                    <p>Piscinas: {property.pools}</p>
+                                    <PiSwimmingPool />
+                                    <p>{property.pools}</p>
                                 </li>
                             </ul>
                         </div>
