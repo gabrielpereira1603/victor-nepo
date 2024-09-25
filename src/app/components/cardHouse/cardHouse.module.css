@@ -1,19 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+
+    gap: 42px;
+}
+
 .cardHouse{
     margin-bottom: 30px;
 }
 
-.cardMain{
+.cardMain {
     margin-top: 20px;
     max-width: 350px;
-    border: 1px solid #555353;
     border-radius: 6px;
+    transition: transform 0.3s ease, border-bottom-color 0.5s ease;
 
     -webkit-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
     -moz-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
     box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
+
+    border-bottom-width: 5px ;
+    border-color: green; 
 }
+
+.cardMain:hover {
+    transform: scale(1.02); /* Aumenta o tamanho do card */
+    border-bottom-width: 4px ;
+    border-color: green; /* Muda a cor da borda inferior para verde */
+    transition: transform 0.3s ease, border-bottom-color 0.5s ease;
+}
+
 
 .cardBody{
     padding: 20px;
@@ -35,6 +55,7 @@
     border-top-left-radius: 6px; /* Arredonda o canto superior esquerdo */
     border-top-right-radius: 6px; /* Arredonda o canto superior direito */
     width: 100%; /* Para que a imagem preencha o contêiner */
+    max-height: 300px;
     height: auto; /* Mantém a proporção da imagem */
 }
 
