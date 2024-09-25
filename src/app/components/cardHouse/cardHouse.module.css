@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.cardHouse{
+    margin-bottom: 30px;
+}
+
 .cardMain{
     margin-top: 20px;
     max-width: 300px;
@@ -90,7 +95,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px 6px;
     list-style: none; /* Remove os marcadores da lista */
 }
 
@@ -103,8 +108,9 @@
 }
 
 .divider {
-    width: 2px; /* Largura da linha */
+    width: 1px; /* Largura da linha */
     height: 40px; /* Altura da linha */
+    border-radius: 4px;
     background: gray; /* Cor da linha */
     margin: 0 10px; /* Espaço entre a linha e os itens */
 }

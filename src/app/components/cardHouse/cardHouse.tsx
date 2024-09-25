@@ -100,6 +100,7 @@ export default function CardHouse() {
                                     <PiSwimmingPool />
                                     <p>{property.pools}</p>
                                 </li>
+
                             </ul>
                         </div>
                     </div>
