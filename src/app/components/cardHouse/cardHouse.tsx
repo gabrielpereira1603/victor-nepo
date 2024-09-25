@@ -41,7 +41,7 @@ export default function CardHouse() {
                             />
                         </div>
                         <div className={style.cardBody}>
-                            <h2 className={style.title}><span>{property.neighborhood.name}</span> #{property.id}</h2>
+                            <h2 className={style.title}><span>{property.neighborhood.name}</span></h2>
                             <span className={style.id}>ID: #{property.id}</span>
                             <h2 className={style.cityState}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

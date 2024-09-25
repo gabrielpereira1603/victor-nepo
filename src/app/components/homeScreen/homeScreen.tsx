@@ -26,7 +26,7 @@ export default function HomeScreen() {
                         <div className="flex gap-4">
                             <div className="w-full">
                                 <label htmlFor="bairro"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                     Bairro
                                 </label>
                                 <input
@@ -39,7 +39,7 @@ export default function HomeScreen() {
                             </div>
                             <div className="w-full">
                                 <label htmlFor="cidade"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                     Cidade
                                 </label>
                                 <input
@@ -55,7 +55,7 @@ export default function HomeScreen() {
                         <div className="flex gap-4">
                             <div className="w-full">
                                 <label htmlFor="valorMin"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                     Valor Mínimo
                                 </label>
                                 <input
@@ -68,7 +68,7 @@ export default function HomeScreen() {
                             </div>
                             <div className="w-full">
                                 <label htmlFor="valorMax"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                     Valor Máximo
                                 </label>
                                 <input
@@ -84,7 +84,7 @@ export default function HomeScreen() {
                         <div className="flex flex-col gap-4 md:flex-row">
                             <div className="w-full md:w-3/4">
                                 <label htmlFor="quartos"
-                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                     Quantidade de Quartos
                                 </label>
                                 <select

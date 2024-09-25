@@ -6,7 +6,7 @@
 
 .cardMain{
     margin-top: 20px;
-    max-width: 300px;
+    max-width: 350px;
     border: 1px solid #555353;
     border-radius: 6px;
 
@@ -44,7 +44,7 @@
     font-style: normal;
     font-weight: 600;
 
-    color: black;
+    color: #252525;
 }
 
 .id{
@@ -116,6 +116,6 @@
 }
 
 .itens svg {
-    width: 1rem; /* Ajuste o valor conforme necessário */
-    height: 1rem; /* Ajuste o valor conforme necessário */
+    width: 1.2rem; /* Ajuste o valor conforme necessário */
+    height: 1.2rem; /* Ajuste o valor conforme necessário */
 }
