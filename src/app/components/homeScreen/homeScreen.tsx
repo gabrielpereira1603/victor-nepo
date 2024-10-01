@@ -29,33 +29,6 @@ export default function HomeScreen() {
         }
     }, [searchQuery]);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (!searchQuery && !minValue && !maxValue && !bedrooms) {
-            setErrorMessage("Por favor, preencha pelo menos um campo para buscar.");
-            setShowError(true);
-            setTimeout(() => {
-                setShowError(false);
-            }, 3000);
-            return;
-        }
-
-        const formattedMinValue = minValue ? parseFloat(minValue).toString() : "";
-        const formattedMaxValue = maxValue ? parseFloat(maxValue).toString() : "";
-
-        // Redireciona o usuário para a rota de filtros
-        router.push({
-            pathname: "/filter",
-            query: {
-                cidade: searchQuery,
-                minValue: formattedMinValue,
-                maxValue: formattedMaxValue,
-                quartos: bedrooms
-            }
-        });
-    };
-
     return (
         <section
             className={style.homeScreen}
@@ -81,7 +54,7 @@ export default function HomeScreen() {
                         </div>
                     )}
 
-                    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                    <form className="flex flex-col gap-4" >
                         <div className="relative w-full">
                             <label htmlFor="cidade" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                 Cidade
