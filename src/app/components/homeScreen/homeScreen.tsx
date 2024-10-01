@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"; // Usamos para redirecionar o usuário
 import style from "@/app/components/homeScreen/homeScreen.module.css";
 import BackgroundPhoto from "./images/background.webp";
 import { City } from "@/app/models/City";
@@ -16,6 +17,8 @@ export default function HomeScreen() {
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [showError, setShowError] = useState<boolean>(false);
 
+    const router = useRouter(); // Hook para redirecionamento
+
     useEffect(() => {
         if (searchQuery) {
             fetchCities(searchQuery)
@@ -29,7 +32,6 @@ export default function HomeScreen() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Verifica se pelo menos um campo está preenchido
         if (!searchQuery && !minValue && !maxValue && !bedrooms) {
             setErrorMessage("Por favor, preencha pelo menos um campo para buscar.");
             setShowError(true);
@@ -39,21 +41,19 @@ export default function HomeScreen() {
             return;
         }
 
-        // Formata os valores antes de enviar
-        const formattedMinValue = minValue ? `R$ ${parseFloat(minValue).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "";
-        const formattedMaxValue = maxValue ? `R$ ${parseFloat(maxValue).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` : "";
+        const formattedMinValue = minValue ? parseFloat(minValue).toString() : "";
+        const formattedMaxValue = maxValue ? parseFloat(maxValue).toString() : "";
 
-        const requestData = {
-            cidade: searchQuery,
-            minValue: formattedMinValue,
-            maxValue: formattedMaxValue,
-            quartos: bedrooms,
-        };
-
-        console.log(requestData);
-
-        setErrorMessage("");
-        setShowError(false);
+        // Redireciona o usuário para a rota de filtros
+        router.push({
+            pathname: "/filter",
+            query: {
+                cidade: searchQuery,
+                minValue: formattedMinValue,
+                maxValue: formattedMaxValue,
+                quartos: bedrooms
+            }
+        });
     };
 
     return (
@@ -184,7 +184,7 @@ export default function HomeScreen() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                                     <path strokeLinecap="round" strokeLinejoin="round"
-                                          d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.773zm0 0L8.25 8.25M8.25 15.75l6.75 6.75M6.75 6.75l10.5 10.5" />
+                                          d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.773zm0 0L8.25 8.25M8.25 15.75l6.75 6.75M6.75 6.75l10.5 10.5"/>
                                 </svg>
                                 Buscar
                             </button>

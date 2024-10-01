@@ -23,14 +23,27 @@
     -moz-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
     box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
 
-    border-bottom-width: 5px ;
+    border-bottom-width: 5px;
+    border-right-width: 1px ;
+    border-left-width: 1px ;
+    border-left-color: gray;
+
     border-color: green;
 }
 
+@media (max-width: 578px) {
+    .cardMain {
+        max-width: 100%;
+        height: 550px;
+        width: 100%;
+    }
+}
+
 .cardMain:hover {
-    transform: scale(1.02); /* Aumenta o tamanho do card */
+    cursor: pointer;
+    transform: scale(1.02);
     border-bottom-width: 4px ;
-    border-color: green; /* Muda a cor da borda inferior para verde */
+    border-color: green;
     transition: transform 0.3s ease, border-bottom-color 0.5s ease;
 }
 
@@ -140,3 +153,4 @@
     width: 1.2rem; /* Ajuste o valor conforme necessário */
     height: 1.2rem; /* Ajuste o valor conforme necessário */
 }
+
