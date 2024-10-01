@@ -11,15 +11,16 @@ import { IoTvSharp } from "react-icons/io5";
 import { TbToolsKitchen3 } from "react-icons/tb";
 import { MdOutlineGarage } from "react-icons/md";
 import { PiSwimmingPool } from "react-icons/pi";
+import api from "@/services/api";
 
 
 export default function CardHouse() {
     const [properties, setProperties] = useState<Property[]>([]);
 
     useEffect(() => {
-        fetch("https://victornepo.somosdevteam.com/api/properties/all")
-            .then(response => response.json())
-            .then(data => {
+        api.get("/properties/all")
+            .then(response => {
+                const data = response.data;
                 if (data.success) {
                     setProperties(data.data);
                 }

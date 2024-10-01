@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['victornepo.somosdevteam.com'], // Domínio adicionado corretamente
+        domains: ['127.0.0.1', 'victornepo.somosdevteam.com'],
     },
 };
 
