@@ -10,18 +10,25 @@ interface FilterContextType {
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [filterData, setFilterData] = useState<any>(() => {
-        // Tenta obter os dados do localStorage na inicialização
-        const savedFilterData = localStorage.getItem('filterData');
-        return savedFilterData ? JSON.parse(savedFilterData) : null;
-    });
+    const [filterData, setFilterData] = useState<any>(null);
+
+    // Esse useEffect garante que o código só rodará no lado do cliente
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            // Tenta obter os dados do localStorage na inicialização
+            const savedFilterData = localStorage.getItem('filterData');
+            setFilterData(savedFilterData ? JSON.parse(savedFilterData) : null);
+        }
+    }, []);
 
     // Armazena os dados no localStorage sempre que eles mudam
     useEffect(() => {
-        if (filterData) {
-            localStorage.setItem('filterData', JSON.stringify(filterData));
-        } else {
-            localStorage.removeItem('filterData');
+        if (typeof window !== 'undefined') {
+            if (filterData) {
+                localStorage.setItem('filterData', JSON.stringify(filterData));
+            } else {
+                localStorage.removeItem('filterData');
+            }
         }
     }, [filterData]);
 
