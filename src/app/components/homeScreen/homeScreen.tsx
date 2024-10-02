@@ -9,6 +9,7 @@ import { fetchCities } from "@/services/City/CityService";
 import { NumericFormat } from 'react-number-format';
 import Swal from 'sweetalert2';
 import {useFilterContext} from "@/contexts/FilterContext";
+import api from "@/services/api";
 
 export default function HomeScreen() {
     const [cities, setCities] = useState<City[]>([]);
@@ -35,38 +36,28 @@ export default function HomeScreen() {
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         if (!searchQuery && !minValue && !maxValue && !bedrooms) {
             setErrorMessage("Por favor, preencha pelo menos um campo.");
             setShowError(true);
             return;
         }
-
+    
         setShowError(false);
         setLoading(true);
-
+    
         const requestData = {
             cidade: searchQuery,
             minValue: minValue || null,
             maxValue: maxValue || null,
             quartos: bedrooms || null,
         };
-
+    
         try {
-            const response = await fetch('http://localhost:8000/api/properties/search', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData),
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao buscar propriedades');
-            }
-
-            const properties = await response.json();
-
+            const response = await api.post('/properties/search', requestData);
+    
+            const properties = response.data;
+    
             if (properties.length === 0) {
                 await Swal.fire({
                     title: 'Nenhum imóvel encontrado!',
@@ -76,17 +67,18 @@ export default function HomeScreen() {
                 });
                 return;
             }
-            console.log(properties)
+    
+            console.log(properties);
             setFilterData({ requestData, properties });
-
+    
             router.push('/filter');
-
+    
         } catch (error) {
             console.error("Erro ao buscar propriedades:", error);
             setErrorMessage("Ocorreu um erro ao buscar as propriedades.");
             setShowError(true);
         } finally {
-            setLoading(false); // Finaliza o carregamento em qualquer caso
+            setLoading(false); 
         }
     };
 
@@ -235,9 +227,9 @@ export default function HomeScreen() {
                                 ) : (
                                     <>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
+                                            strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
                                             <path strokeLinecap="round" strokeLinejoin="round"
-                                                  d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.773zm0 0L8.25 8.25M8.25 15.75l6.75 6.75M6.75 6.75l10.5 10.5"/>
+                                                d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.773zm0 0L8.25 8.25M8.25 15.75l6.75 6.75M6.75 6.75l10.5 10.5"/>
                                         </svg>
                                         Buscar
                                     </>
