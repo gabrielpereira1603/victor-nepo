@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Property } from "@/app/models/Property";
 import style from "@/app/components/cardHouse/cardHouse.module.css";
 import Image from "next/image";
@@ -13,20 +12,20 @@ import { MdOutlineGarage } from "react-icons/md";
 import { PiSwimmingPool } from "react-icons/pi";
 import api from "@/services/api";
 
+interface CardHouseProps {
+    properties: Property[];
+}
 
-export default function CardHouse() {
-    const [properties, setProperties] = useState<Property[]>([]);
+export default function CardHouse({ properties }: CardHouseProps) {
+    const formatCurrency = ({ value }: { value: any }) => {
+        const numberValue = parseFloat(value);
+        if (isNaN(numberValue)) return 'R$ 0,00';
 
-    useEffect(() => {
-        api.get("/properties/all")
-            .then(response => {
-                const data = response.data;
-                if (data.success) {
-                    setProperties(data.data);
-                }
-            })
-            .catch(error => console.error("Erro ao buscar propriedades:", error));
-    }, []);
+        return numberValue.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    };
 
     return (
         <section className={style.cardHouse}>
@@ -63,7 +62,7 @@ export default function CardHouse() {
                                 Bairro: {property.neighborhood.name}
                             </h2>
                             <div className={style.boxValue}>
-                                <h2><strong>{property.value}</strong></h2>
+                                <h2><strong>{formatCurrency({value: property.value})}</strong></h2>
                             </div>
                         </div>
 

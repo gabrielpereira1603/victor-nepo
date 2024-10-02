@@ -1,10 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react"; // Importando useEffect e useState
 import style from "@/app/components/latestProperties/latestProperties.module.css";
-import Image from "next/image";
 import CardHouse from "@/app/components/cardHouse/cardHouse";
+import api from "@/services/api";
 
 export default function LatestProperties() {
+    const [properties, setProperties] = useState([]); // Estado para armazenar as propriedades
+
+    useEffect(() => {
+        const fetchLatestProperties = async () => {
+            try {
+                const response = await api.get("/properties/all");
+                const data = response.data;
+
+                if (data.success) {
+                    setProperties(data.data); // Atualiza o estado com as propriedades
+                }
+            } catch (error) {
+                console.error("Erro ao buscar propriedades:", error);
+            }
+        };
+
+        fetchLatestProperties();
+    }, []);
+
     return (
         <section className={style.latestProperties}>
             <div className={style.content}>
@@ -19,7 +39,7 @@ export default function LatestProperties() {
                     </h2>
                     <h2 className={style.subtitle}>Disponibilizamos vários imóveis para sua escolha!</h2>
                 </div>
-                <CardHouse />
+                <CardHouse properties={properties} />
             </div>
         </section>
     );
