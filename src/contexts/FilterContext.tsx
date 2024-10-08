@@ -9,25 +9,44 @@ interface FilterContextType {
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
+const EXPIRATION_TIME = 15 * 60 * 1000;
+
 export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [filterData, setFilterData] = useState<any>(null);
 
-    // Esse useEffect garante que o código só rodará no lado do cliente
+    // Carrega os dados do localStorage e verifica a validade
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            // Tenta obter os dados do localStorage na inicialização
-            const savedFilterData = localStorage.getItem('filterData');
-            setFilterData(savedFilterData ? JSON.parse(savedFilterData) : null);
+            const savedData = localStorage.getItem('filterData');
+            const savedTimestamp = localStorage.getItem('filterTimestamp');
+
+            if (savedData && savedTimestamp) {
+                const currentTime = new Date().getTime();
+                const storedTime = parseInt(savedTimestamp, 10);
+                console.log("Dados salvos no localStorage:", savedData);
+                console.log("Timestamp salvo no localStorage:", savedTimestamp);
+                // Verifica se os dados expiraram
+                if (currentTime - storedTime < EXPIRATION_TIME) {
+                    setFilterData(JSON.parse(savedData));
+                } else {
+                    // Se expirado, remove os dados
+                    localStorage.removeItem('filterData');
+                    localStorage.removeItem('filterTimestamp');
+                }
+            }
         }
     }, []);
 
-    // Armazena os dados no localStorage sempre que eles mudam
+    // Armazena os dados e a timestamp no localStorage quando os dados mudarem
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (filterData) {
+                const currentTime = new Date().getTime();
                 localStorage.setItem('filterData', JSON.stringify(filterData));
+                localStorage.setItem('filterTimestamp', currentTime.toString());
             } else {
                 localStorage.removeItem('filterData');
+                localStorage.removeItem('filterTimestamp');
             }
         }
     }, [filterData]);

@@ -1,0 +1,22 @@
+#filterForm {
+    position: sticky;
+    top: 20px;
+    float: left;
+    width: 250px;
+    margin: 50px;
+    max-height: 450px;
+    background-color: white;
+    border: 1px solid #f3f3f9;
+    padding: 1rem;
+}
+
+.divider{
+    width: 70px;
+    height: 3px;
+    background:  rgb(69,151,69);
+    margin-bottom: 4px;
+}
+
+.spanTitle{
+    color: rgb(69,151,69);
+}

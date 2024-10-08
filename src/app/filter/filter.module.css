@@ -1,0 +1,12 @@
+.filterSection {
+    display: flex;
+}
+
+.mainContent {
+    padding: 20px;
+}
+
+.title{
+    margin-top: 30px;
+    font-weight: bolder;
+}

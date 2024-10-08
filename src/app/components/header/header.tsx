@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-
 import Logo from "./images/logo.png";
 import Image from "next/image";
 
@@ -24,6 +23,8 @@ import {
     SquaresPlusIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
+import { FaPhone } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid';
 
@@ -43,21 +44,11 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
-        <header className="bg-[#f1f5f9]">
+        <header className="bg-white">
             <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
                 <div className="flex lg:flex-1">
                     <a href="/" className="-m-1.5 p-1.5">
                         <Image src={Logo} alt="" width={150}/>
-                        {/*<h1*/}
-                        {/*    className="text-white"*/}
-                        {/*    style={{*/}
-                        {/*        fontFamily: '"Sora", Sans-serif',*/}
-                        {/*        fontSize: '27px',*/}
-                        {/*        fontWeight: '900',*/}
-                        {/*    }}*/}
-                        {/*>*/}
-                        {/*    Victor Hugo Nepomuceno*/}
-                        {/*</h1>*/}
                     </a>
                 </div>
                 <div className="flex lg:hidden">
@@ -79,15 +70,27 @@ export default function Header() {
                         Imóveis
                     </a>
                     <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
-                        Serviços
-                    </a>
-                    <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
                         Loteamentos
                     </a>
                     <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
                         Sobre
                     </a>
                 </PopoverGroup>
+
+                <div className="hidden lg:flex items-center gap-4 ml-6">
+
+                    <span className="lg:flex items-center text-sm font-medium gap-1 text-gray-700">
+                        <FaWhatsapp />
+                        +55 11 1234-5678
+                    </span>
+
+                    <div className="h-6 border-l border-gray-300"></div>
+                    
+                    <span className="lg:flex items-center text-sm font-medium gap-1 text-gray-700">
+                        <FaPhone/>
+                        +55 11 98765-4321
+                    </span>
+                </div>
             </nav>
             <Dialog
                 open={mobileMenuOpen}
@@ -98,22 +101,12 @@ export default function Header() {
                 <DialogPanel
                     className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 transition-transform transform-gpu duration-300 ease-in-out"
                     style={{
-                        transform: mobileMenuOpen ? 'translateX(0%)' : 'translateX(100%)',
+                        transform: mobileMenuOpen? 'translateX(0%)' : 'translateX(100%)',
                     }}
                 >
                     <div className="flex items-center justify-between">
                         <a href="/" className="-m-1.5 p-1.5">
                             <Image src={Logo} alt="" width={150}/>
-                            {/*<h1*/}
-                            {/*    className="text-white"*/}
-                            {/*    style={{*/}
-                            {/*        fontFamily: '"Sora", Sans-serif',*/}
-                            {/*        fontSize: '27px',*/}
-                            {/*        fontWeight: '900',*/}
-                            {/*    }}*/}
-                            {/*>*/}
-                            {/*    Victor Hugo Nepomuceno*/}
-                            {/*</h1>*/}
                         </a>
                         <button
                             type="button"
@@ -141,12 +134,6 @@ export default function Header() {
                                 </a>
                                 <a
                                     href="/"
-                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black-900 hover:text-[rgb(69,151,69)]"
-                                >
-                                    Serviços
-                                </a>
-                                <a
-                                    href="/"
                                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-black-900 hover:text-[rgb(69,151,69)]"
                                 >
                                     Loteamentos
@@ -158,6 +145,16 @@ export default function Header() {
                                     Sobre
                                 </a>
                             </div>
+                        </div>
+                    </div>
+                    <div className="mt-6 space-y-4">
+                        <div className="flex items-center gap-2">
+                            <FaWhatsapp />
+                            <span className="text-sm font-medium text-gray-700">+55 11 1234-5678</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <FaPhone />
+                            <span className="text-sm font-medium text-gray-700">+55 11 98765-4321</span>
                         </div>
                     </div>
                 </DialogPanel>
