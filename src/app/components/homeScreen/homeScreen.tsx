@@ -6,10 +6,12 @@ import style from "@/app/components/homeScreen/homeScreen.module.css";
 import BackgroundPhoto from "./images/background.webp";
 import { searchProperties } from "@/services/FilterService";
 import { NumericFormat } from 'react-number-format';
-import {useFilterContext} from "@/contexts/FilterContext";
-import {UseCitySearch} from "@/services/UseCitySearch";
+import { useFilterContext } from "@/contexts/FilterContext";
+import { UseCitySearch } from "@/services/UseCitySearch";
 import { IoMdSearch } from "react-icons/io";
 import api from "@/services/api";
+import Swal from "sweetalert2";
+import LoadingIconComponent from "@/app/components/icons/LoadingIconComponent";
 
 export default function HomeScreen() {
     const { cities, setCities, searchQuery, setSearchQuery, errorMessage, setErrorMessage, showError, setShowError } = UseCitySearch();
@@ -21,9 +23,48 @@ export default function HomeScreen() {
     const { setFilterData } = useFilterContext();
     const router = useRouter();
 
-    const handleSearch = (e: React.FormEvent) => {
+    useEffect(() => {
+        localStorage.removeItem('filterData');
+    }, []);
+
+    const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
-        searchProperties(searchQuery, minValue, maxValue, bedrooms, setFilterData, setLoading, setErrorMessage, setShowError, router);
+
+        setLoading(true);
+
+        try {
+            const properties = await searchProperties({
+                searchQuery,
+                minValue,
+                maxValue,
+                bedrooms,
+            });
+
+            setFilterData({
+                requestData: { searchQuery, minValue, maxValue, bedrooms },
+                properties,
+            });
+
+            localStorage.setItem('filterData', JSON.stringify({ searchQuery, minValue, maxValue, bedrooms }));
+
+            if (properties.length > 0) {
+                router.push('/filter');
+            } else {
+                await Swal.fire({
+                    title: 'Nenhum imóvel encontrado!',
+                    text: 'Tente ajustar os filtros e buscar novamente.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                });
+            }
+
+        } catch (error) {
+            console.error("Erro ao buscar propriedades:", error);
+            setErrorMessage("Ocorreu um erro ao buscar as propriedades.");
+            setShowError(true);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -53,7 +94,8 @@ export default function HomeScreen() {
 
                     <form className="flex flex-col gap-4" onSubmit={handleSearch}>
                         <div className="relative w-full">
-                            <label htmlFor="cidade" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
+                            <label htmlFor="cidade"
+                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-dark">
                                 Cidade
                             </label>
                             <input
@@ -67,7 +109,7 @@ export default function HomeScreen() {
                                 autoComplete="off"
                             />
                             {cities.length > 0 && (
-                                <ul className="absolute z-10 bg-white border border-gray-300 mt-1 rounded-md shadow-lg w-full">
+                                <ul className="absolute z-10 bg-white text-black border border-gray-300 mt-1 rounded-md shadow-lg w-full">
                                     {cities.map((city) => (
                                         <li
                                             key={city.id}
@@ -86,7 +128,8 @@ export default function HomeScreen() {
 
                         <div className="flex gap-4">
                             <div className="w-full">
-                                <label htmlFor="valorMin" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
+                                <label htmlFor="valorMin"
+                                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray">
                                     Valor Mínimo
                                 </label>
                                 <NumericFormat
@@ -155,26 +198,17 @@ export default function HomeScreen() {
                             >
                                 {loading ? (
                                     <>
-                                        <svg
-                                            className="animate-spin w-5 h-5 mr-2"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                        >
-                                            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.5"/>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v8l4 4"/>
-                                        </svg>
+                                        <LoadingIconComponent height={20} width={20} className="mr-2" style={{ fill: '#ffffff' }} />
                                         Carregando...
                                     </>
                                 ) : (
                                     <>
-                                        <IoMdSearch/>
+                                        <IoMdSearch />
                                         Buscar
                                     </>
                                 )}
                             </button>
+
                         </div>
                     </form>
                 </div>

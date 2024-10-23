@@ -1,7 +1,7 @@
 "use client";
 
-import CommunInput from "@/app/components/forms/inputs/communInput/communInput";
 import React, { useEffect, useState } from "react";
+import CommunInput from "@/app/components/forms/inputs/communInput/communInput";
 import style from '@/app/components/forms/filterForms/filterForms.module.css';
 import { fetchCities } from "@/services/City/CityService";
 import api from "@/services/api";
@@ -9,15 +9,17 @@ import Swal from "sweetalert2";
 import { City } from "@/app/models/City";
 import { useFilterContext } from "@/contexts/FilterContext";
 import { useRouter } from "next/navigation";
+import LoadingIconComponent from "@/app/components/icons/LoadingIconComponent";
+import { IoMdSearch } from "react-icons/io";
 
 export default function FilterForm() {
-    const { filterData, setFilterData } = useFilterContext();
-    const [cidade, setCidade] = useState("");
-    const [minValue, setMinValue] = useState("");
-    const [maxValue, setMaxValue] = useState("");
-    const [bedrooms, setBedrooms] = useState("");
+    const { setFilterData } = useFilterContext();
+    const [cidade, setCidade] = useState<string>("");
+    const [minValue, setMinValue] = useState<number | "">("");
+    const [maxValue, setMaxValue] = useState<number | "">("");
+    const [bedrooms, setBedrooms] = useState<number | "">("");
     const [cities, setCities] = useState<City[]>([]);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [searchQuery, setSearchQuery] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
     const [showError, setShowError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
@@ -25,21 +27,12 @@ export default function FilterForm() {
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem('filterData') || '{}');
-        if (storedData) {
-            setCidade(storedData.cidade || "");
-            setMinValue(storedData.minValue || "");
-            setMaxValue(storedData.maxValue || "");
-            setBedrooms(storedData.quartos || "");
-        }
-    }, []);
-
-    useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('filterData') || '{}');
-        if (storedData) {
-            setCidade(storedData.cidade || "");
-            setMinValue(storedData.minValue || "");
-            setMaxValue(storedData.maxValue || "");
-            setBedrooms(storedData.quartos || "");
+        if (storedData && storedData.requestData) {
+            setCidade(storedData.requestData.cidade || "");
+            setMinValue(storedData.requestData.minValue || "");
+            setMaxValue(storedData.requestData.maxValue || "");
+            setBedrooms(storedData.requestData.bedrooms ? parseInt(storedData.requestData.bedrooms) : "");
+            setSearchQuery(storedData.requestData.cidade || "");
         }
     }, []);
 
@@ -50,14 +43,15 @@ export default function FilterForm() {
                 .catch((error) => {
                     console.error("Erro ao definir cidades:", error);
                 });
+        } else {
+            setCities([]);
         }
     }, [searchQuery]);
-
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!searchQuery && !minValue && !maxValue && !bedrooms) {
+        if (!cidade && !minValue && !maxValue && !bedrooms) {
             setErrorMessage("Por favor, preencha pelo menos um campo.");
             setShowError(true);
             return;
@@ -66,18 +60,21 @@ export default function FilterForm() {
         setShowError(false);
         setLoading(true);
 
-        const requestData = {
-            cidade: searchQuery,
-            minValue: minValue || null,
-            maxValue: maxValue || null,
-            quartos: bedrooms || null,
-        };
+        const requestData: any = {};
+        if (cidade) requestData.cidade = cidade;
+        if (minValue) requestData.minValue = minValue;
+        if (maxValue) requestData.maxValue = maxValue;
+        if (bedrooms !== "") requestData.bedrooms = bedrooms;
 
         try {
             const response = await api.post('/properties/search', requestData);
             const properties = response.data;
 
-            localStorage.setItem('filterData', JSON.stringify(requestData));
+            const updatedFilterData = { requestData, properties };
+
+            setFilterData(updatedFilterData);
+            console.log('filterForm: ' + JSON.stringify(updatedFilterData));
+            localStorage.setItem('filterData', JSON.stringify(updatedFilterData));
 
             if (properties.length === 0) {
                 await Swal.fire({
@@ -86,14 +83,9 @@ export default function FilterForm() {
                     icon: 'warning',
                     confirmButtonText: 'OK',
                 });
-                return;
+            } else {
+                router.push('/filter');
             }
-
-            console.log(properties);
-            setFilterData({ requestData, properties });
-
-            router.push('/filter');
-
         } catch (error) {
             console.error("Erro ao buscar propriedades:", error);
             setErrorMessage("Ocorreu um erro ao buscar as propriedades.");
@@ -106,7 +98,7 @@ export default function FilterForm() {
     return (
         <div className="flex">
             <form className="filterForm" id={style.filterForm} onSubmit={handleSearch}>
-                <h2 className="flex text-lg font-semibold gap-1" id={style.title}>
+                <h2 className="flex text-black text-lg font-semibold gap-1" id={style.title}>
                     Encontre seu
                     <span className={style.spanTitle}>Imóvel</span>
                 </h2>
@@ -119,14 +111,38 @@ export default function FilterForm() {
                     placeholder="Digite a cidade"
                     value={cidade}
                     autoComplete="off"
-                    onChange={(e) => setCidade(e.target.value)}
+                    onChange={(value) => {
+                        // Como `value` pode ser `string | number`, use a verificação de tipo
+                        if (typeof value === "string") {
+                            setCidade(value);
+                            setSearchQuery(value);
+                        }
+                    }}
                 />
+                {/* Sugestões de cidade */}
+                {cities.length > 0 && (
+                    <ul className={style.suggestionList}>
+                        {cities.map((city) => (
+                            <li
+                                key={city.id}
+                                onClick={() => {
+                                    setCidade(city.name);
+                                    setSearchQuery("");
+                                    setCities([]); // Limpa as sugestões após selecionar
+                                }}
+                                className={style.suggestionItem}
+                            >
+                                {city.name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
 
                 <CommunInput
                     label="Valor Mínimo"
                     type="number"
                     value={minValue}
-                    onChange={(value) => setMinValue(value)}
+                    onChange={(value: number | "") => setMinValue(value)}
                     placeholder="Valor Mínimo"
                     formatOptions={{
                         thousandSeparator: true,
@@ -140,7 +156,7 @@ export default function FilterForm() {
                     label="Valor Máximo"
                     type="number"
                     value={maxValue}
-                    onChange={(value) => setMaxValue(value)}
+                    onChange={(value: number | "") => setMaxValue(value)}
                     placeholder="Valor Máximo"
                     formatOptions={{
                         thousandSeparator: true,
@@ -155,10 +171,21 @@ export default function FilterForm() {
                     type="number"
                     placeholder="Quartos"
                     value={bedrooms}
-                    onChange={(e) => setBedrooms(e.target.value)}
+                    onChange={(value: number | "") => setBedrooms(value)}
                 />
-                <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-md shadow-sm hover:bg-green-700 transition-all mt-4" disabled={loading}>
-                    {loading ? "Carregando..." : "Buscar"}
+
+                <button type="submit" className="w-full flex-shrink-0 flex items-center justify-center bg-green-600 text-white py-2 rounded-md shadow-sm hover:bg-green-700 transition-all mt-4" disabled={loading}>
+                    {loading ? (
+                        <>
+                            <LoadingIconComponent height={20} width={20} className="mr-2" style={{ fill: '#ffffff' }} />
+                            Carregando...
+                        </>
+                    ) : (
+                        <>
+                            <IoMdSearch />
+                            Buscar
+                        </>
+                    )}
                 </button>
             </form>
         </div>

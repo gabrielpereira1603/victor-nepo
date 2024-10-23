@@ -23,8 +23,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
             if (savedData && savedTimestamp) {
                 const currentTime = new Date().getTime();
                 const storedTime = parseInt(savedTimestamp, 10);
-                console.log("Dados salvos no localStorage:", savedData);
-                console.log("Timestamp salvo no localStorage:", savedTimestamp);
+
                 // Verifica se os dados expiraram
                 if (currentTime - storedTime < EXPIRATION_TIME) {
                     setFilterData(JSON.parse(savedData));
@@ -37,7 +36,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         }
     }, []);
 
-    // Armazena os dados e a timestamp no localStorage quando os dados mudarem
+    // Armazena os dados e a timestamp no localStorage sempre que filterData muda
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (filterData) {

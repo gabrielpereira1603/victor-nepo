@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     align-content: center;
-
+    justify-content: start;
     gap: 42px;
 }
 
@@ -14,14 +14,11 @@
 }
 
 .cardMain {
+    background-color: white;
     margin-top: 20px;
     max-width: 350px;
     border-radius: 6px;
     transition: transform 0.3s ease, border-bottom-color 0.5s ease;
-
-    -webkit-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
-    -moz-box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
-    box-shadow: -10px 6px 11px -2px rgba(153,150,153,0.62);
 
     border-bottom-width: 5px;
     border-right-width: 1px ;
@@ -33,9 +30,20 @@
 
 @media (max-width: 578px) {
     .cardMain {
-        max-width: 100%;
+        max-width: 90%;
         height: 550px;
         width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+        gap: 42px;
     }
 }
 
@@ -95,6 +103,7 @@
     justify-content: center;
     gap: 4px;
     font-size: 0.9rem;
+    color: #514f4f;
 }
 
 .cityState svg {
@@ -108,6 +117,7 @@
     justify-content: center;
     gap: 4px;
     font-size: 0.9rem;
+    color: #514f4f;
 }
 
 .neighborhood svg {

@@ -1,3 +1,5 @@
+
+
 #filterForm {
     position: sticky;
     top: 20px;
@@ -19,4 +21,18 @@
 
 .spanTitle{
     color: rgb(69,151,69);
+}
+
+@media (max-width: 720px) {
+    #filterForm {
+        position: sticky;
+        top: 20px;
+        float: left;
+        width: 90%;
+        margin: 30px;
+        max-height: 450px;
+        background-color: white;
+        border: 1px solid #f3f3f9;
+        padding: 1rem;
+    }
 }

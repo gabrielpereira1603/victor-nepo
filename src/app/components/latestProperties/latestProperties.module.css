@@ -14,25 +14,23 @@
     flex-direction: column;
 }
 
-.title{
+#title{
     display: flex;
     align-items: center;
     gap: 4px;
-    color: black;
     text-transform: uppercase;
     font-size: 1.7rem;
     font-weight: bolder;
 }
 
-.title span{
+.boxText h2 span{
     color: rgb(69,151,69);
 }
 
-.subtitle{
+#subtitle{
     display: flex;
     align-items: center;
     gap: 4px;
-    color: black;
     font-size: 1rem;
     font-weight: 500;
 }

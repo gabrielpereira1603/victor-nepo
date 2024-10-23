@@ -10,7 +10,7 @@ interface CommunInputProps {
     type?: string;
     placeholder?: string;
     value: string | number;
-    onChange: (value: any) => void;
+    onChange: (value: string | number) => void;
     autoComplete?: string;
     icon?: string;
     formatOptions?: object;
@@ -25,14 +25,17 @@ const CommunInput: React.FC<CommunInputProps> = ({ label, type = "text", placeho
         )}
         {icon && <Image src={icon} alt="input icon" className={style.inputIcon} />}
 
-        {type === "number" ? (
+        {type === "number" && formatOptions ? (
             <NumericFormat
                 {...formatOptions}
                 value={value}
-                onValueChange={(values) => onChange(values.floatValue || '')}
-                thousandSeparator
-                decimalScale={2}
-                fixedDecimalScale
+                onValueChange={(values) => {
+                    if (values.floatValue !== undefined) {
+                        onChange(values.floatValue);
+                    } else {
+                        onChange("");
+                    }
+                }}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder={placeholder}
             />
@@ -41,7 +44,9 @@ const CommunInput: React.FC<CommunInputProps> = ({ label, type = "text", placeho
                 type={type}
                 placeholder={placeholder}
                 value={value}
-                onChange={onChange}
+                onChange={(e) => {
+                    onChange(e.target.value);
+                }}
                 autoComplete={autoComplete}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
