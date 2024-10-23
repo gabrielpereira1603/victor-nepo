@@ -112,7 +112,6 @@ export default function FilterForm() {
                     value={cidade}
                     autoComplete="off"
                     onChange={(value) => {
-                        // Como `value` pode ser `string | number`, use a verificação de tipo
                         if (typeof value === "string") {
                             setCidade(value);
                             setSearchQuery(value);
@@ -142,7 +141,11 @@ export default function FilterForm() {
                     label="Valor Mínimo"
                     type="number"
                     value={minValue}
-                    onChange={(value: number | "") => setMinValue(value)}
+                    onChange={(value) => {
+                        if (typeof value === "number" || value === "") {
+                            setMinValue(value);
+                        }
+                    }}
                     placeholder="Valor Mínimo"
                     formatOptions={{
                         thousandSeparator: true,
@@ -156,7 +159,11 @@ export default function FilterForm() {
                     label="Valor Máximo"
                     type="number"
                     value={maxValue}
-                    onChange={(value: number | "") => setMaxValue(value)}
+                    onChange={(value) => {
+                        if (typeof value === "number" || value === "") {
+                            setMaxValue(value);
+                        }
+                    }}
                     placeholder="Valor Máximo"
                     formatOptions={{
                         thousandSeparator: true,
@@ -171,8 +178,13 @@ export default function FilterForm() {
                     type="number"
                     placeholder="Quartos"
                     value={bedrooms}
-                    onChange={(value: number | "") => setBedrooms(value)}
+                    onChange={(value) => {
+                        if (typeof value === "number" || value === "") {
+                            setBedrooms(value);
+                        }
+                    }}
                 />
+
 
                 <button type="submit" className="w-full flex-shrink-0 flex items-center justify-center bg-green-600 text-white py-2 rounded-md shadow-sm hover:bg-green-700 transition-all mt-4" disabled={loading}>
                     {loading ? (
