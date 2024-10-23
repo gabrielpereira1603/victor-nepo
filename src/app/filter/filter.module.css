@@ -46,4 +46,20 @@
         display: flex;
         flex-direction: column;
     }
+
+    .titleContainer:hover ~ .divider,
+.divider:hover {
+    width: 30%;
+    transition: width 0.3s ease-in-out;
+}
+
+.divider {
+    width: 21%;
+    height: 3px;
+    margin-left: 30px;
+    background: rgb(69, 151, 69);
+    margin-bottom: 4px;
+    transition: width 0.3s ease-in-out;
+}
+
 }

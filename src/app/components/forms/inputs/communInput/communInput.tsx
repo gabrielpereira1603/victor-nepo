@@ -14,10 +14,23 @@ interface CommunInputProps {
     autoComplete?: string;
     icon?: string;
     formatOptions?: object;
+    suggestions?: string[];
+    onSelectSuggestion?: (suggestion: string) => void;
 }
 
-const CommunInput: React.FC<CommunInputProps> = ({ label, type = "text", placeholder, value, onChange, autoComplete, icon, formatOptions }) => (
-    <div className={style.inputWrapper}>
+const CommunInput: React.FC<CommunInputProps> = ({
+    label,
+    type = "text",
+    placeholder,
+    value,
+    onChange,
+    autoComplete,
+    icon,
+    formatOptions,
+    suggestions = [],
+    onSelectSuggestion
+}) => (
+    <div className={`${style.inputWrapper} relative`}>
         {label && (
             <label htmlFor={label} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray mt-2">
                 {label}
@@ -51,6 +64,24 @@ const CommunInput: React.FC<CommunInputProps> = ({ label, type = "text", placeho
                 autoComplete={autoComplete}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
+        )}
+        {/* Renderiza as sugestões, se houver */}
+        {suggestions.length > 0 && (
+            <ul className="absolute z-10 bg-white text-black border border-gray-300 mt-1 rounded-md shadow-lg w-full">
+                {suggestions.map((suggestion, index) => (
+                    <li
+                        key={index}
+                        className="cursor-pointer hover:bg-gray-200 p-2"
+                        onClick={() => {
+                            if (onSelectSuggestion) {
+                                onSelectSuggestion(suggestion);
+                            }
+                        }}
+                    >
+                        {suggestion}
+                    </li>
+                ))}
+            </ul>
         )}
     </div>
 );

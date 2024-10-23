@@ -11,13 +11,14 @@ import { useFilterContext } from "@/contexts/FilterContext";
 import { useRouter } from "next/navigation";
 import LoadingIconComponent from "@/app/components/icons/LoadingIconComponent";
 import { IoMdSearch } from "react-icons/io";
+import CommunSelect from "../inputs/communSelect/communSelect";
 
 export default function FilterForm() {
     const { setFilterData } = useFilterContext();
     const [cidade, setCidade] = useState<string>("");
     const [minValue, setMinValue] = useState<number | "">("");
     const [maxValue, setMaxValue] = useState<number | "">("");
-    const [bedrooms, setBedrooms] = useState<number | "">("");
+    const [bedrooms, setBedrooms] = useState<string | number>(""); // Ajustando o tipo para string | number
     const [cities, setCities] = useState<City[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -31,7 +32,7 @@ export default function FilterForm() {
             setCidade(storedData.requestData.cidade || "");
             setMinValue(storedData.requestData.minValue || "");
             setMaxValue(storedData.requestData.maxValue || "");
-            setBedrooms(storedData.requestData.bedrooms ? parseInt(storedData.requestData.bedrooms) : "");
+            setBedrooms(storedData.requestData.bedrooms || "");
             setSearchQuery(storedData.requestData.cidade || "");
         }
     }, []);
@@ -117,25 +118,13 @@ export default function FilterForm() {
                             setSearchQuery(value);
                         }
                     }}
+                    suggestions={cities.map(city => city.name)}
+                    onSelectSuggestion={(suggestion) => {
+                        setCidade(suggestion);
+                        setSearchQuery("");
+                        setCities([]); 
+                    }}
                 />
-                {/* Sugestões de cidade */}
-                {cities.length > 0 && (
-                    <ul className={style.suggestionList}>
-                        {cities.map((city) => (
-                            <li
-                                key={city.id}
-                                onClick={() => {
-                                    setCidade(city.name);
-                                    setSearchQuery("");
-                                    setCities([]); // Limpa as sugestões após selecionar
-                                }}
-                                className={style.suggestionItem}
-                            >
-                                {city.name}
-                            </li>
-                        ))}
-                    </ul>
-                )}
 
                 <CommunInput
                     label="Valor Mínimo"
@@ -155,36 +144,19 @@ export default function FilterForm() {
                     }}
                 />
 
-                <CommunInput
-                    label="Valor Máximo"
-                    type="number"
-                    value={maxValue}
-                    onChange={(value) => {
-                        if (typeof value === "number" || value === "") {
-                            setMaxValue(value);
-                        }
-                    }}
-                    placeholder="Valor Máximo"
-                    formatOptions={{
-                        thousandSeparator: true,
-                        prefix: 'R$ ',
-                        decimalScale: 2,
-                        fixedDecimalScale: true,
-                    }}
-                />
-
-                <CommunInput
-                    label="Quartos"
-                    type="number"
-                    placeholder="Quartos"
+                <CommunSelect
+                    label="Quantidade de Quartos"
+                    name="quartos"
                     value={bedrooms}
-                    onChange={(value) => {
-                        if (typeof value === "number" || value === "") {
-                            setBedrooms(value);
-                        }
-                    }}
+                    onChange={(value) => setBedrooms(value)}
+                    options={[
+                        { value: 1, label: "1 Quarto" },
+                        { value: 2, label: "2 Quartos" },
+                        { value: 3, label: "3 Quartos" },
+                        { value: 4, label: "4 Quartos" },
+                        { value: "5+", label: "5+ Quartos" }
+                    ]}
                 />
-
 
                 <button type="submit" className="w-full flex-shrink-0 flex items-center justify-center bg-green-600 text-white py-2 rounded-md shadow-sm hover:bg-green-700 transition-all mt-4" disabled={loading}>
                     {loading ? (
