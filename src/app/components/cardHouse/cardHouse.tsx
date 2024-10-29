@@ -34,7 +34,7 @@ export default function CardHouse({ properties }: CardHouseProps) {
                     <div
                         key={property.id}
                         className={`${style.cardMain} cursor-pointer`}
-                        onClick={() => router.push(`/properties/${property.id}`)} // Redireciona para a página da propriedade ao clicar
+                        onClick={() => router.push(`/properties/${property.id}`)} 
                     >
                         <div className={style.cardTitle}>
                             <Image
