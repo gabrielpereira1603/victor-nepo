@@ -4,7 +4,7 @@ import {State} from "@/app/models/State";
 
 export interface Property {
     id: number;
-    photo_url: string | null;
+    photo_url: string;
     maps: string | null;
     value: string;
     bedrooms: number;

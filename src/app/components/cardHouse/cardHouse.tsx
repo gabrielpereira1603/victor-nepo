@@ -3,20 +3,20 @@
 import { Property } from "@/app/models/Property";
 import style from "@/app/components/cardHouse/cardHouse.module.css";
 import Image from "next/image";
-
-import { MdOutlineBedroomParent } from "react-icons/md";
-import { MdOutlineBathroom } from "react-icons/md";
+import { MdOutlineBedroomParent, MdOutlineBathroom, MdOutlineGarage } from "react-icons/md";
 import { IoTvSharp } from "react-icons/io5";
 import { TbToolsKitchen3 } from "react-icons/tb";
-import { MdOutlineGarage } from "react-icons/md";
 import { PiSwimmingPool } from "react-icons/pi";
-import api from "@/services/api";
+import { useRouter } from "next/navigation";
+import EyesIconComponent from "@/app/components/icons/EyesIconCompoonent";
 
 interface CardHouseProps {
     properties: Property[];
 }
 
 export default function CardHouse({ properties }: CardHouseProps) {
+    const router = useRouter();
+
     const formatCurrency = ({ value }: { value: any }) => {
         const numberValue = parseFloat(value);
         if (isNaN(numberValue)) return 'R$ 0,00';
@@ -31,14 +31,23 @@ export default function CardHouse({ properties }: CardHouseProps) {
         <section className={style.cardHouse}>
             <div className={style.content}>
                 {properties.map(property => (
-                    <div key={property.id} className={style.cardMain}>
+                    <div
+                        key={property.id}
+                        className={`${style.cardMain} cursor-pointer`}
+                        onClick={() => router.push(`/properties/${property.id}`)} // Redireciona para a página da propriedade ao clicar
+                    >
                         <div className={style.cardTitle}>
                             <Image
                                 src={property.photo_url || '/default-image.jpg'}
                                 alt={`Foto da propriedade ${property.id}`}
                                 width={300}
                                 height={200}
+                                className={style.cardImage}
                             />
+                            <div className={style.overlay}>
+                                <EyesIconComponent height={32} width={32} />
+                                <span className={style.viewMore}>Ver mais</span>
+                            </div>
                         </div>
                         <div className={style.cardBody}>
                             <a href="" className={style.title}><span>{property.neighborhood.name}</span></a>
@@ -73,34 +82,30 @@ export default function CardHouse({ properties }: CardHouseProps) {
                                     <p>{property.bedrooms}</p>
                                 </li>
                                 <div className={style.divider}/>
-                                {/* Divisor entre os itens */}
                                 <li className={style.itens}>
                                     <MdOutlineBathroom/>
                                     <p>{property.bathrooms}</p>
                                 </li>
                                 <div className={style.divider}/>
-                                {/* Divisor entre os itens */}
                                 <li className={style.itens}>
                                     <IoTvSharp/>
                                     <p>{property.living_rooms}</p>
                                 </li>
                                 <div className={style.divider}/>
-                                {/* Divisor entre os itens */}
                                 <li className={style.itens}>
-                                <TbToolsKitchen3 />
+                                    <TbToolsKitchen3 />
                                     <p>{property.kitchens}</p>
                                 </li>
-                                <div className={style.divider} /> {/* Divisor entre os itens */}
+                                <div className={style.divider}/>
                                 <li className={style.itens}>
                                     <MdOutlineGarage />
                                     <p>{property.parking_spaces}</p>
                                 </li>
-                                <div className={style.divider} /> {/* Divisor entre os itens */}
+                                <div className={style.divider}/>
                                 <li className={style.itens}>
                                     <PiSwimmingPool />
                                     <p>{property.pools}</p>
                                 </li>
-
                             </ul>
                         </div>
                     </div>

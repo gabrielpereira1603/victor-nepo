@@ -66,7 +66,7 @@ export default function Header() {
                     <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
                         Início
                     </a>
-                    <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
+                    <a href="/filter" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
                         Imóveis
                     </a>
                     <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
@@ -127,7 +127,7 @@ export default function Header() {
                                     Início
                                 </a>
                                 <a
-                                    href="/"
+                                    href="/filter"
                                     className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black-900 hover:text-[rgb(69,151,69)]"
                                 >
                                     Imóveis
