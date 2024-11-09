@@ -70,6 +70,9 @@ export default function Header() {
                         Imóveis
                     </a>
                     <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
+                        Vendidos
+                    </a>
+                    <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
                         Loteamentos
                     </a>
                     <a href="/" className="text-sm font-semibold leading-6 text-black hover:text-[rgb(69,151,69)]">
