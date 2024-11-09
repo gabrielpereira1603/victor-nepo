@@ -11,7 +11,7 @@ export default function Footer() {
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     <div className="mb-6 md:mb-0">
-                        <a href="https://somosdevteam.com/" className="flex items-center">
+                        <a href="https://victornepomuceno.com.br/" className="flex items-center">
                             <Image src={Logo} alt={"Logo Victor"} width={80}/>
 
                             <span
@@ -24,10 +24,10 @@ export default function Footer() {
                             <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-black">Contatos</h2>
                             <ul className="text-gray-500 font-medium">
                                 <li className="mb-4">
-                                    <a href="#" className="hover:underline">(67) 0 0000-0000</a>
+                                    <a href="#" className="hover:underline">(67) 9 9950-9939</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:underline">(67) 0 0000-0000</a>
+                                    <a href="#" className="hover:underline">(67) 9 9950-9939</a>
                                 </li>
                             </ul>
                         </div>
