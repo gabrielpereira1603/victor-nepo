@@ -81,14 +81,14 @@ export default function Header() {
 
                     <span className="lg:flex items-center text-sm font-medium gap-1 text-gray-700">
                         <FaWhatsapp />
-                        +55 11 1234-5678
+                        (67) 9 9950-9939
                     </span>
 
                     <div className="h-6 border-l border-gray-300"></div>
                     
                     <span className="lg:flex items-center text-sm font-medium gap-1 text-gray-700">
                         <FaPhone/>
-                        +55 11 98765-4321
+                        (67) 9 9950-9939
                     </span>
                 </div>
             </nav>
