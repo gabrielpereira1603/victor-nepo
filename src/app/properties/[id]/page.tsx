@@ -17,7 +17,7 @@ export default function PropertyDetails() {
             const fetchProperty = async () => {
                 try {
                     setLoading(true);
-                    const response = await fetch(`http://localhost:8000/api/properties/${id}`); // Ajuste a URL de acordo com sua API
+                    const response = await fetch(`https://victornepo.somosdevteam.com/api/properties/${id}`); // Ajuste a URL de acordo com sua API
                     if (!response.ok) {
                         throw new Error("Erro ao buscar dados");
                     }
