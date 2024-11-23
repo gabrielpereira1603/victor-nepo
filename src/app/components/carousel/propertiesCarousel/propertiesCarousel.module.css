@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.carouselContainer {
+  width: 100%;
+}
+
+.carouselMain {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.mainCarousel{
+  width: 600px;
+}
+
+.infoHouse {
+  background-color: green;
+  border-top:solid 5px rgb(24, 24, 24) ;
+  min-width: 300px;
+  max-width: 400px;
+  height: 400px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px;
+}
+
+.type{
+  margin-bottom: 25px;
+  margin-top: 8px;
+  padding: 6px;
+  background-color: rgb(221, 223, 221);
+  color: green;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  border: 0.5px solid rgba(245, 245, 245, 0.34);
+}
+
+.address{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addressIten{
+  color: white;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+.addressIten:hover{
+  cursor: pointer;
+  color: rgb(24, 24, 24);
+}
+
+.addressList{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.addressList li{
+  display: flex;
+  color: whitesmoke;
+}
+
+.addressList li i svg{
+  color: whitesmoke;
+}
+
+.idProperty p{
+  margin-left: 4px;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.divider{
+  width: 100%;
+  background-color: black;
+  height: 0.8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.descriptionList {
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  grid-template-columns: repeat(2, 1fr); /* Cria duas colunas de largura igual */
+  align-items: center; /* Alinha verticalmente os itens no centro */
+  gap: 10px; /* Espaçamento entre os itens */
+}
+
+.descriptionList li {
+  display: flex;
+  align-items: center;
+  max-width: calc(50% - 5px); /* Garante que cada item ocupe metade da largura disponível */
+  flex: 0 0 auto; /* Impede que os itens se expandam para ocupar o espaço restante */
+  overflow: hidden;
+}
+
+.descriptionList li i{
+  padding: 4px;
+}
+
+.descriptionList li i svg{
+  color: white;
+  font-size: 1rem; /* Define o tamanho fixo do ícone */
+  width: 1.4rem; /* Tamanho fixo horizontal */
+  height: 1.4rem; /* Tamanho fixo vertical */
+  display: inline-flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+}
+
+.descriptionList li p {
+  color: white;
+  white-space: nowrap; /* Impede que o texto quebre em várias linhas */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona "..." quando o texto ultrapassa o limite */
+  max-width: 100%; /* Garante que o texto ocupe todo o espaço disponível no item */
+}
+
+.value{
+  color: white;
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin: 20px;
+}
+
+.mainImage{
+  width: 600px;
+  height: 600px;
+  object-fit: contain;
+}
+
+
+@media (max-width: 720px) {
+  .carouselContainer{
+    
+  }
+
+  .carouselMain{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .mainCarousel {
+  }
+
+  .infoHouse {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.mySwiper2 {
+  position: relative;
+}
+
+.mySwiper2 .swiper-button-next,
+.mySwiper2 .swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo das setas */
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 10;
+}
+
+.mySwiper2 .swiper-button-next {
+  right: 10px; /* Ajuste a distância da seta direita */
+}
+
+.mySwiper2 .swiper-button-prev {
+  left: 10px; /* Ajuste a distância da seta esquerda */
+}
+
+/* Opcional: Estilo para o wrapper da imagem */
+.imageWrapper {
+  position: relative;
+}
+
+.thumbCarousel {
+  width: 100%;
+}
+
+.thumbSwiper {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.thumbnailImage {
+  width: 100%;  /* Ajusta para a imagem ocupar todo o espaço disponível */
+  height: auto;  /* Mantém a proporção das imagens */
+  object-fit: cover;  /* Faz a imagem cobrir o espaço sem distorção */
+  opacity: 0.7;  /* Opacidade da imagem */
+  transition: opacity 0.3s ease;  /* Transição suave para a opacidade */
+}
+
+.swiper-slide {
+  width: auto !important;  /* Garante que a largura seja ajustada automaticamente para evitar espaços */
+  height: 100px;  /* Defina a altura para a miniatura */
+  margin: 0 !important;  /* Remove qualquer margem que possa estar causando o espaço */
+}
+
+.swiper-wrapper {
+  display: flex; /* Garante que as slides sejam exibidas em linha */
+}

@@ -4,23 +4,31 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import style from "@/app/properties/properties.module.css";
 import PropertiesCarousel from "@/app/components/carousel/propertiesCarousel/propertiesCarousel";
-import { Property } from "@/app/models/Property";
+import { Property } from "@/app/models/Property"; // Defina esse modelo com os campos que você espera da API
+import api from "@/services/api";
 
 export default function PropertyDetails() {
-    const params = useParams();
-    const id = params.id; 
-    console.log(id)
-    const [property, setProperty] = useState<Property | null>(null);
+    const { id } = useParams(); // Pega o ID da propriedade da URL
+    const [property, setProperty] = useState<Property | null>(null); // Estado para armazenar os dados da propriedade
+    const [loading, setLoading] = useState<boolean>(true); // Estado de carregamento
 
     useEffect(() => {
         if (id) {
             const fetchProperty = async () => {
                 try {
-                    const response = await fetch(`https://victornepo.somosdevteam.com/api/properties/one/${id}`);
-                    const data = await response.json();
-                    setProperty(data.data);
+                    setLoading(true);
+                    const response = await fetch(`http://localhost:8000/api/properties/${id}`); // Ajuste a URL de acordo com sua API
+                    if (!response.ok) {
+                        throw new Error("Erro ao buscar dados");
+                    }
+                    const data: Property = await response.json();
+                    console.log(data);
+
+                    setProperty(data); // Armazena os dados da propriedade
                 } catch (error) {
-                    console.error("Erro ao buscar propriedade:", error);
+                    console.error("Erro ao buscar dados:", error);
+                } finally {
+                    setLoading(false);
                 }
             };
 
@@ -28,21 +36,21 @@ export default function PropertyDetails() {
         }
     }, [id]);
 
-    if (!property) {
+    if (loading) {
         return <div>Carregando...</div>;
     }
 
+    // Se não encontrar a propriedade
+    if (!property) {
+        return <div>Propriedade não encontrada.</div>;
+    }
+
+    const imageUrls = property.images.map((image: { image_url: string }) => image.image_url);
+
+
     return (
         <section className={style.propertiesSection}>
-            <h1>Detalhes da Propriedade {property.id}</h1>
-            {/* Renderizar o carrossel com as imagens */}
-            <PropertiesCarousel images={[property.photo_url]} />
-            <div>
-                <p>Valor: {property.value}</p>
-                <p>Quartos: {property.bedrooms}</p>
-                <p>Banheiros: {property.bathrooms}</p>
-                {/* Renderizar outros campos relevantes */}
-            </div>
+            <PropertiesCarousel images={imageUrls} />
         </section>
     );
 }

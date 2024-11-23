@@ -1,8 +1,10 @@
 import {Neighborhood} from "@/app/models/Neighborhood";
 import {City} from "@/app/models/City";
 import {State} from "@/app/models/State";
+import { PropertyImages } from "./PropertyImages";
 
 export interface Property {
+    images: any;
     id: number;
     photo_url: string;
     maps: string | null;
@@ -25,4 +27,5 @@ export interface Property {
     neighborhood: Neighborhood;
     city: City;
     state: State;
+    propertyImages: PropertyImages[];
 }
