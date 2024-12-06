@@ -40,7 +40,6 @@ export default function PropertyDetails() {
         return <div>Carregando...</div>;
     }
 
-    // Se não encontrar a propriedade
     if (!property) {
         return <div>Propriedade não encontrada.</div>;
     }
@@ -51,6 +50,8 @@ export default function PropertyDetails() {
     return (
         <section className={style.propertiesSection}>
             <PropertiesCarousel images={imageUrls} />
+
+            <div className="details-property"></div>
         </section>
     );
 }

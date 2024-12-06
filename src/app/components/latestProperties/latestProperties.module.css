@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .latestProperties {
-    width: 80%;
+    width: 100%;
+    padding-left: 10vw;
     color: black;
     display: flex;
     flex-direction: column;
@@ -34,4 +35,17 @@
     gap: 4px;
     font-size: 1rem;
     font-weight: 500;
+}
+@media (max-width: 990px) {
+    .latestProperties {
+        width: 90%;
+        padding-left: 2vw;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        font-family: "Inter", sans-serif;
+        margin: 300px auto 0 auto;
+        justify-content: center;
+    }
+    
 }

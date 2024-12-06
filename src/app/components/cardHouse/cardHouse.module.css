@@ -39,6 +39,15 @@
         height: 450px;
         width: 100%;
     }
+
+    .cardHouse{
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 0px;
+    }
 }
 
 @media (max-width: 520px) {
@@ -53,7 +62,7 @@
 
     .list{
         display: flex;
-        gap: 3px;
+        gap: 10px;
     }
 }
 

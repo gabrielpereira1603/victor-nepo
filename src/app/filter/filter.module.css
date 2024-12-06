@@ -2,7 +2,7 @@
 
 .spanContent{
     display: flex;
-    padding: 0px 0px 0px 10vw;
+    padding: 0px 0px 0px 6vw;
 }
 .mainContent {
     padding: 20px;
@@ -10,7 +10,7 @@
 
 .welcome{
     width: 100%;
-    padding: 30px 30px 30px 14vw;
+    padding: 30px 30px 30px 10vw;
     background-color: rgba(0, 128, 0, 0.308);
 }
 
