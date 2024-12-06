@@ -162,9 +162,35 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    overflow-x: hidden;
   }
 
-  .mainCarousel {
+  .thumbCarousel {
+    background-color: rgba(0, 128, 0, 0.308);
+    width: 100%;
+  }
+  
+  .thumbSwiper {
+    width: 100% !important;
+    display: flex;
+    gap: 8px; 
+    overflow: hidden;
+    justify-content: center; 
+  }
+  
+  
+  .thumbnailImage {
+    width: 100% !important; 
+    height: 400px; 
+    object-fit: cover;
+    transition: opacity 0.3s ease; 
+    cursor: pointer; 
+    opacity: 0.8; 
+  }
+
+
+  .mainImage{
+    width: 100%;
   }
 
   .infoHouse {
@@ -173,28 +199,9 @@
   }
 }
 
-.mySwiper2 {
-  position: relative;
-}
 
-.mySwiper2 .swiper-button-next,
-.mySwiper2 .swiper-button-prev {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo das setas */
-  border-radius: 50%;
-  padding: 10px;
-  z-index: 10;
-}
 
-.mySwiper2 .swiper-button-next {
-  right: 10px; /* Ajuste a distância da seta direita */
-}
 
-.mySwiper2 .swiper-button-prev {
-  left: 10px; /* Ajuste a distância da seta esquerda */
-}
 
 /* Opcional: Estilo para o wrapper da imagem */
 .imageWrapper {
@@ -202,28 +209,28 @@
 }
 
 .thumbCarousel {
+  background-color: rgba(0, 128, 0, 0.308);
   width: 100%;
 }
 
 .thumbSwiper {
-  margin: 0 auto;
+  display: flex;  /* Flexbox para alinhar os itens horizontalmente */
+  gap: 8px; /* Controla o espaço entre as miniaturas */
   overflow: hidden;
+  justify-content: center; /* Alinha as miniaturas ao centro */
 }
+
 
 .thumbnailImage {
-  width: 100%;  /* Ajusta para a imagem ocupar todo o espaço disponível */
-  height: auto;  /* Mantém a proporção das imagens */
-  object-fit: cover;  /* Faz a imagem cobrir o espaço sem distorção */
-  opacity: 0.7;  /* Opacidade da imagem */
-  transition: opacity 0.3s ease;  /* Transição suave para a opacidade */
+  padding: 20px;
+  width: 350px; /* Largura fixa para miniaturas */
+  height: 200px; /* Altura fixa para miniaturas */
+  object-fit: cover; /* Faz a imagem cobrir o espaço sem distorção */
+  transition: opacity 0.3s ease; /* Transição suave ao alterar a opacidade */
+  cursor: pointer; /* Altera o cursor para indicar que é clicável */
+  opacity: 0.8; /* Define opacidade inicial */
 }
 
-.swiper-slide {
-  width: auto !important;  /* Garante que a largura seja ajustada automaticamente para evitar espaços */
-  height: 100px;  /* Defina a altura para a miniatura */
-  margin: 0 !important;  /* Remove qualquer margem que possa estar causando o espaço */
-}
-
-.swiper-wrapper {
-  display: flex; /* Garante que as slides sejam exibidas em linha */
+.thumbnailImage:hover {
+  opacity: 1; /* Fica totalmente opaca ao passar o mouse */
 }

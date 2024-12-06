@@ -30,13 +30,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="pt">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-200`}>
         <FilterProvider>
             <div className="flex flex-col min-h-screen">
                 <Header />
-                <BodyNightMode>
                     {children}
-                </BodyNightMode>
                 <Footer />
             </div>
         </FilterProvider>

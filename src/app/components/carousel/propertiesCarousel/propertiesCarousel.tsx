@@ -62,7 +62,7 @@ export default function PropertiesCarousel({ images }: PropertiesCarouselProps) 
             'margin': '0px', // Defina a cor das setas, caso necessário
           }}
             spaceBetween={10}
-            navigation={true}
+            navigation={false}
             thumbs={{ swiper: thumbsSwiper }}
             modules={[FreeMode, Navigation, Thumbs]}
             className={`${style.mainCarousel} mySwiper2`}
@@ -78,7 +78,7 @@ export default function PropertiesCarousel({ images }: PropertiesCarouselProps) 
         <Swiper
           onSwiper={setThumbsSwiper}
           loop={true}  // Habilita o loop para as imagens voltarem ao início
-          spaceBetween={0}  // Não haverá espaço entre as imagens
+          spaceBetween={8}  // Espaçamento controlado entre as miniaturas
           slidesPerView={4}  // Exibe 4 miniaturas por vez
           freeMode={true}  // Permite que o carrossel se mova livremente
           watchSlidesProgress={true}  // Observa o progresso das slides para controle
