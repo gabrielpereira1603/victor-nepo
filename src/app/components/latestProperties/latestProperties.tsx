@@ -13,7 +13,7 @@ export default function LatestProperties() {
             try {
                 const response = await api.get("/properties/all");
                 const data = response.data;
-
+                console.log(data)
                 if (data.success) {
                     setProperties(data.data); 
                 }
@@ -30,7 +30,7 @@ export default function LatestProperties() {
             <div className={style.content}>
                 <div className={style.boxText}>
                     <h2 
-                        className="text-black dark:text-white" 
+                        className="text-black dark:text-black" 
                         id={style.title}>
 
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.9}
@@ -43,7 +43,7 @@ export default function LatestProperties() {
                         Últimos <span>Imóveis</span>
                     </h2>
                     <h2 
-                        className="text-black dark:text-white" 
+                        className="text-black dark:text-black" 
                         id={style.subtitle}>
                         Disponibilizamos vários imóveis para sua escolha!
                     </h2>

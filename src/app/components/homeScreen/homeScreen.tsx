@@ -12,6 +12,7 @@ import { IoMdSearch } from "react-icons/io";
 import api from "@/services/api";
 import Swal from "sweetalert2";
 import LoadingIconComponent from "@/app/components/icons/LoadingIconComponent";
+import SearchComponent from "../icons/SearchComponent";
 
 export default function HomeScreen() {
     const { cities, setCities, searchQuery, setSearchQuery, errorMessage, setErrorMessage, showError, setShowError } = UseCitySearch();
@@ -193,7 +194,7 @@ export default function HomeScreen() {
 
                             <button
                                 type="submit"
-                                className="w-full md:w-1/4 mt-3 md:mt-7 flex-shrink-0 flex items-center justify-center bg-green-600 text-white py-2 rounded-md shadow-sm hover:bg-green-700 transition-all"
+                                className="flex gap-1 w-full md:w-1/4 mt-3 md:mt-7 flex-shrink-0 flex items-center justify-center bg-green-600 text-white py-2 rounded-md shadow-sm hover:bg-green-700 transition-all"
                                 disabled={loading}
                             >
                                 {loading ? (
@@ -203,7 +204,7 @@ export default function HomeScreen() {
                                     </>
                                 ) : (
                                     <>
-                                        <IoMdSearch />
+                                        <SearchComponent height={16} width={16} className="" style={{ fill: '#ffffff' }} />
                                         Buscar
                                     </>
                                 )}

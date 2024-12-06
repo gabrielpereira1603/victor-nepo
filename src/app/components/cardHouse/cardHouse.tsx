@@ -13,7 +13,6 @@ import EyesIconComponent from "@/app/components/icons/EyesIconCompoonent";
 interface CardHouseProps {
     properties: Property[];
 }
-
 export default function CardHouse({ properties }: CardHouseProps) {
     const router = useRouter();
 
@@ -27,6 +26,11 @@ export default function CardHouse({ properties }: CardHouseProps) {
         });
     };
 
+    if (!Array.isArray(properties)) {
+        console.error("properties não é um array:", properties);
+        return <p>Erro ao carregar propriedades.</p>; // Ou outro fallback
+    }
+
     return (
         <section className={style.cardHouse}>
             <div className={style.content}>
@@ -34,7 +38,7 @@ export default function CardHouse({ properties }: CardHouseProps) {
                     <div
                         key={property.id}
                         className={`${style.cardMain} cursor-pointer`}
-                        onClick={() => router.push(`/properties/${property.id}`)} 
+                        onClick={() => router.push(`/properties/${property.id}`)}
                     >
                         <div className={style.cardTitle}>
                             <Image

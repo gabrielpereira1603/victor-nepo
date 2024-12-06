@@ -1,17 +1,37 @@
-.filterSection {
-    display: flex;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+.spanContent{
+    display: flex;
+    padding: 0px 0px 0px 10vw;
+}
 .mainContent {
     padding: 20px;
 }
 
-.title{
-    font-weight: bolder;
+.welcome{
+    width: 100%;
+    padding: 30px 30px 30px 14vw;
+    background-color: rgba(0, 128, 0, 0.308);
+}
+
+.welcome h2{
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.titleContainer h2{
+    font-family: "Poppins", serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .titleContainer {
+    width: 91%;
+    background-color: white;
     margin-top: 30px;
+    padding: 20px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -21,30 +41,28 @@
     fill: #459745;
 }
 
-.titleContainer:hover ~ .divider,
-.divider:hover {
-    width: 50%;
-    transition: width 0.3s ease-in-out;
-}
-
-.divider {
-    width: 11%;
-    height: 3px;
-    margin-left: 30px;
-    background: rgb(69, 151, 69);
-    margin-bottom: 4px;
-    transition: width 0.3s ease-in-out;
-}
-
-.title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-@media (max-width: 720px) {
-    .filterSection{
+@media (max-width: 990px) {
+    .spanContent{
         display: flex;
         flex-direction: column;
+        padding: 0px 0px 0px 0vw;
+    }
+
+    .welcome{
+        width: 100%;
+        padding: 30px 30px 30px 60px;
+        background-color: rgba(0, 128, 0, 0.308);
+    }
+
+    .titleContainer {
+        width: 90%;
+        background-color: white;
+        margin-top: 0px;
+        margin-left: 20px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
     .titleContainer:hover ~ .divider,

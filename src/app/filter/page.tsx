@@ -12,29 +12,45 @@ export default function Filter() {
     const { filterData } = useFilterContext();
     const [properties, setProperties] = useState<Property[]>([]);
 
+
     useEffect(() => {
-        if (filterData && filterData.properties) {
-            setProperties(filterData.properties);
-        } else {
-            setProperties([]);
+        if (filterData?.properties) {
+            setProperties(filterData.properties); // Atualiza a lista de propriedades com os dados do contexto
         }
     }, [filterData]);
-    console.log(properties)
 
+    // Função para gerar o título com base nos filtros
+    const generateTitle = () => {
+        const { searchQuery, minValue, maxValue, bedrooms } = filterData?.requestData || {};
+        let titleParts: string[] = [];
+
+        if (searchQuery) titleParts.push(`Cidade: ${searchQuery}`);
+        if (minValue) titleParts.push(`Valor Mínimo: R$ ${minValue}`);
+        if (maxValue) titleParts.push(`Valor Máximo: R$ ${maxValue}`);
+        if (bedrooms) titleParts.push(`Quartos: ${bedrooms}`);
+
+        // Retorna os filtros aplicados no título
+        return titleParts.join(" | ");
+    };
 
     return (
         <section className={style.filterSection}>
-            <FilterForm />
-
-            <div className={style.mainContent}>
-                <div className={style.titleContainer}>
-                    <SearchIconComponent width="24" height="24" className={style.icon} />
-                    <h2 className={style.title}>Resultados da Busca</h2>
-                </div>
-                <div className={style.divider} />
-
-                <CardHouse properties={properties} />
+            <div className={style.welcome}>
+                <h2 className={style.title}>Resultado da Busca por Imóvel</h2>
+                <p>Victor Hugo Nepomuceno Corretor de Imóveis - Costa Rica/MS e Região.</p>
             </div>
+            <span className={style.spanContent}>
+                <FilterForm />
+                <div className={style.mainContent}>
+                    <div className={style.titleContainer}>
+                        <SearchIconComponent width="24" height="24" className={style.icon} />
+                        {/* O título gerado com base nos filtros */}
+                        <h2 className={style.title}>{generateTitle()}</h2>
+                    </div>
+
+                    <CardHouse properties={properties} />
+                </div>
+            </span>
         </section>
     );
 }

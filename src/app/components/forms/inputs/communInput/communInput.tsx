@@ -2,7 +2,6 @@
 
 import React from "react";
 import style from "@/app/components/forms/inputs/communInput/communInput.module.css";
-import Image from "next/image";
 import { NumericFormat } from 'react-number-format';
 
 interface CommunInputProps {
@@ -12,7 +11,7 @@ interface CommunInputProps {
     value: string | number;
     onChange: (value: string | number) => void;
     autoComplete?: string;
-    icon?: string;
+    icon?: React.ReactNode; // Alterado para aceitar componentes React
     formatOptions?: object;
     suggestions?: string[];
     onSelectSuggestion?: (suggestion: string) => void;
@@ -32,11 +31,13 @@ const CommunInput: React.FC<CommunInputProps> = ({
 }) => (
     <div className={`${style.inputWrapper} relative`}>
         {label && (
-            <label htmlFor={label} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray mt-2">
+            <label htmlFor={label} className={`${style.label} text-sm font-medium text-gray-900 dark:text-gray mt-2 ml-1`}>
+                {icon && <div className={`${style.inputIcon} left-2 top-3`}>{icon}</div>}
+                
                 {label}
             </label>
         )}
-        {icon && <Image src={icon} alt="input icon" className={style.inputIcon} />}
+
 
         {type === "number" && formatOptions ? (
             <NumericFormat
@@ -49,7 +50,7 @@ const CommunInput: React.FC<CommunInputProps> = ({
                         onChange("");
                     }
                 }}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder={placeholder}
             />
         ) : (
@@ -62,7 +63,7 @@ const CommunInput: React.FC<CommunInputProps> = ({
                     onChange(newValue);
                 }}
                 autoComplete={autoComplete}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-white dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
         )}
         {/* Renderiza as sugestões, se houver */}
