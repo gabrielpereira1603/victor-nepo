@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import api from "@/services/api";
+import Image from "next/image"; // Importando o componente correto
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import style from "@/app/components/carousel/propertiesCarousel/propertiesCarousel.module.css";
-import { MdOutlineBathroom, MdOutlineBedroomParent, MdOutlineGarage } from "react-icons/md";
+import {
+  MdOutlineBathroom,
+  MdOutlineBedroomParent,
+  MdOutlineGarage,
+} from "react-icons/md";
 import { IoTvSharp } from "react-icons/io5";
 import { PiSwimmingPool } from "react-icons/pi";
 import { TbToolsKitchen3 } from "react-icons/tb";
@@ -42,11 +46,9 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
   ];
 
   const imageUrls = property.images.map((image) => image.image_url);
-
   return (
     <div className={style.carouselContainer}>
       <div className={style.carouselMain}>
-
         <div className={style.infoHouse}>
           <span className={style.type}>
             <p>Venda</p>
@@ -60,19 +62,21 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
           </div>
 
           <div className={style.divider} />
-            <div className={style.description}>
-              <ul className={style.descriptionList}>
-                {houseDetails.map((item, index) => (
-                  <li key={index}>
-                    <i>{item.icon}</i>
-                    <p>{item.text}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className={style.description}>
+            <ul className={style.descriptionList}>
+              {houseDetails.map((item, index) => (
+                <li key={index}>
+                  <i>{item.icon}</i>
+                  <p>{item.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className={style.divider} />
           <div className={style.value}>
-            <h1>R$ {parseFloat(property.value).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</h1>
+            <h1>
+              R$ {parseFloat(property.value).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+            </h1>
           </div>
         </div>
 
@@ -86,12 +90,20 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
         >
           {imageUrls.map((image, index) => (
             <SwiperSlide key={index}>
-              <img src={image} alt={`Imagem ${index}`} className={style.mainImage} />
+              <div style={{ position: "relative", width: "100%", height: "400px" }}>
+                <Image
+                  src={image}
+                  alt={`Imagem ${index}`}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className={style.mainImage}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
-      
+
       <div className={style.thumbCarousel}>
         <Swiper
           onSwiper={setThumbsSwiper}
@@ -105,7 +117,15 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
         >
           {imageUrls.map((image, index) => (
             <SwiperSlide key={index}>
-              <img src={image} alt={`Thumbnail ${index}`} className={style.thumbnailImage} />
+              <div style={{ position: "relative", width: "100%", height: "100px" }}>
+                <Image
+                  src={image}
+                  alt={`Thumbnail ${index}`}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className={style.thumbnailImage}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -113,4 +133,3 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
     </div>
   );
 }
-
