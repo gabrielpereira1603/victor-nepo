@@ -17,14 +17,14 @@ export default function PropertyDetails() {
             const fetchProperty = async () => {
                 try {
                     setLoading(true);
-                    const response = await fetch(`https://victornepo.somosdevteam.com/api/properties/${id}`); // Ajuste a URL de acordo com sua API
+                    const response = await fetch(`http://127.0.0.1:8000/api/properties/${id}`); // Ajuste a URL de acordo com sua API
                     if (!response.ok) {
                         throw new Error("Erro ao buscar dados");
                     }
                     const data: Property = await response.json();
                     console.log(data);
 
-                    setProperty(data); // Armazena os dados da propriedade
+                    setProperty(data); 
                 } catch (error) {
                     console.error("Erro ao buscar dados:", error);
                 } finally {
@@ -49,9 +49,8 @@ export default function PropertyDetails() {
 
     return (
         <section className={style.propertiesSection}>
-            <PropertiesCarousel images={imageUrls} />
-
-            <div className="details-property"></div>
+          <PropertiesCarousel property={property} />
+          <div className="details-property"></div>
         </section>
-    );
+      );
 }
