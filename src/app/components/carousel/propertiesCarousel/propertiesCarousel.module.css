@@ -3,6 +3,7 @@
   width: 100%;
 }
 
+
 .carouselMain {
   display: flex;
   flex-direction: row;
@@ -10,7 +11,8 @@
 }
 
 .mainCarousel{
-  width: 600px;
+  margin: 0px !important;
+  width: 800px;
 }
 
 .infoHouse {
@@ -24,6 +26,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 14px;
+  margin-left: 4vw;
 }
 
 .type{
@@ -196,6 +199,7 @@
   .infoHouse {
     width: 100%;
     max-width: 100%;
+    margin-left: 0vw;
   }
 }
 

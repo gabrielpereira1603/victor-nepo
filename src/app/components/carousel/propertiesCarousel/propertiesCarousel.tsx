@@ -46,28 +46,30 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
   return (
     <div className={style.carouselContainer}>
       <div className={style.carouselMain}>
-        {/* Informações sobre a propriedade */}
+
         <div className={style.infoHouse}>
           <span className={style.type}>
             <p>Venda</p>
           </span>
+
           <div className={style.address}>
             <p className={style.addressIten}>{property.neighborhood.name}</p>
             <p className={style.addressIten}>
               {property.city.name}, {property.state.name}
             </p>
           </div>
+
           <div className={style.divider} />
-          <div className={style.description}>
-            <ul className={style.descriptionList}>
-              {houseDetails.map((item, index) => (
-                <li key={index}>
-                  <i>{item.icon}</i>
-                  <p>{item.text}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className={style.description}>
+              <ul className={style.descriptionList}>
+                {houseDetails.map((item, index) => (
+                  <li key={index}>
+                    <i>{item.icon}</i>
+                    <p>{item.text}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           <div className={style.divider} />
           <div className={style.value}>
             <h1>R$ {parseFloat(property.value).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</h1>
