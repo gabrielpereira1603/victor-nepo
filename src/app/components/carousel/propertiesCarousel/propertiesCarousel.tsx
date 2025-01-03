@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-
+import api from "@/services/api";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -89,6 +89,7 @@ export default function PropertiesCarousel({ property }: PropertiesCarouselProps
           ))}
         </Swiper>
       </div>
+      
       <div className={style.thumbCarousel}>
         <Swiper
           onSwiper={setThumbsSwiper}
