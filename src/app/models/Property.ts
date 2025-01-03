@@ -28,4 +28,6 @@ export interface Property {
     city: City;
     state: State;
     propertyImages: PropertyImages[];
+
+    description: string;
 }

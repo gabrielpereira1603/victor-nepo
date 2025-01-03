@@ -1,0 +1,70 @@
+.propetieDetails{
+    width: 80%;
+    padding: 16px;
+    margin: 50px 20px 20px 0px;
+    background-color: white;
+    border: 1px solid #f3f3f9;
+}
+
+.headerInfo {
+    padding: 6px;
+    font-weight: 300;
+}
+
+.headerInfo h1{
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.address{
+    font-weight: 500;
+    margin-top: 20px;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.address ul{
+    font-weight: 300;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.adicionalInfo{
+    padding: 6px;
+    margin-top: 20px;
+}
+
+.adicionalInfo h1{
+    font-weight: 500;
+}
+
+.adicionalInfo ul{
+    font-weight: 300;
+}
+
+.locationPropetie{
+    font-weight: 500;
+}
+
+.divider{
+    width: 100%;
+    height: 1px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    background-color: #334155;
+}
+
+@media (max-width: 720px) {
+    .propetieDetails{
+        width: 100%;
+        padding: 16px;
+        margin: 0px 20px 10px 0px;
+        background-color: white;
+        border: 1px solid #f3f3f9;
+    }
+}
