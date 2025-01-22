@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/app/components/header/header";
 import Footer from "@/app/components/footer/footer";
 import { FilterProvider } from "@/contexts/FilterContext";
-import { BodyNightMode } from "@/app/components/BodyNightMode/BodyNightMode";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
