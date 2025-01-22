@@ -24,6 +24,7 @@ interface PropertiesCarouselProps {
       parking_spaces: number;
       pools: number;
       description: string;
+      maps: string;
     };
   }
 
@@ -98,11 +99,11 @@ export default function DetailsProperty({ property }: PropertiesCarouselProps) {
                 <div className={style.divider} />
 
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60110.62072092734!2d-51.223764680317686!3d-19.673682831444797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9499658c3248de25%3A0x82925c667f225d56!2sParana%C3%ADba%2C%20MS%2C%2079500-000!5e0!3m2!1spt-BR!2sbr!4v1735934539449!5m2!1spt-BR!2sbr"
+                    src={property.maps}
                     width="380"
                     height="380"
-                    style={{ border: 0 }} // Corrigido para usar um objeto
-                    allowFullScreen={true} // Corrigido para React
+                    style={{ border: 0 }} 
+                    allowFullScreen={true} 
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>

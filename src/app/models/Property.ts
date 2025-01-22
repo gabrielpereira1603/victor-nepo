@@ -7,7 +7,7 @@ export interface Property {
     images: any;
     id: number;
     photo_url: string;
-    maps: string | null;
+    maps: string;
     value: string;
     bedrooms: number;
     bathrooms: number;
