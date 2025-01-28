@@ -34,13 +34,13 @@ export default function Home() {
       <LatestProperties />
 
       {showModal && alert && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full">
-            <img
-              src={alert.image_path} 
-              alt="Alerta Ativo"
-              className="w-full h-full object-cover rounded-lg mb-4"
-            />
+          <img
+            src={alert.image_path}
+            alt="Alerta Ativo"
+            className="w-full max-w-md h-auto max-h-[50vh] object-contain rounded-lg mb-4 mx-auto"
+          />
           <button
             className="w-full flex justify-center items-center px-4 py-2 bg-white dark:bg-gray-800 border border-red-300 dark:border-red-500 rounded-md font-semibold text-xs text-red-700 dark:text-red-500 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150"
             onClick={() => setShowModal(false)}
