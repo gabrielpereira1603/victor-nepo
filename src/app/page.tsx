@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchAlert() {
       try {
-        const response = await fetch(`http://localhost:8000/api/alerts/all`);
+        const response = await fetch(`https://victornepo.somosdevteam.com/api/alerts/all`);
         const data = await response.json();
 
         if (data.success && data.data.activeAlerts.length > 0) {
@@ -36,18 +36,18 @@ export default function Home() {
       {showModal && alert && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg w-full">
-            <button
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-              onClick={() => setShowModal(false)}
-            >
-              &times;
-            </button>
-            <h2 className="text-xl font-bold mb-4 text-center">Alerta Ativo</h2>
             <img
               src={alert.image_path} 
               alt="Alerta Ativo"
-              className="w-full h-64 object-cover rounded-lg mb-4"
+              className="w-full h-full object-cover rounded-lg mb-4"
             />
+          <button
+            className="w-full flex justify-center items-center px-4 py-2 bg-white dark:bg-gray-800 border border-red-300 dark:border-red-500 rounded-md font-semibold text-xs text-red-700 dark:text-red-500 uppercase tracking-widest shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25 transition ease-in-out duration-150"
+            onClick={() => setShowModal(false)}
+          >
+            &times; Fechar
+          </button>
+
           </div>
         </div>
       )}
